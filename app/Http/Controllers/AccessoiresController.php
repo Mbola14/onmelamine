@@ -24,6 +24,10 @@ class AccessoiresController extends Controller
         $unite = $request->input('unite');
 
         DB::insert("insert into accessoire (accessoire, unite) values ('".$nom_accessoire."', '".$unite."')");
+        $select = DB::select("SELECT * FROM accessoire ORDER BY id_accessoire DESC LIMIT 1");
+        $id_accessoire = $select[0]->id_accessoire;
+
+        DB::insert("insert into stock (id_accessoire) values ('".$id_accessoire."')");
 
         return redirect()->route('liste_clients');
     }

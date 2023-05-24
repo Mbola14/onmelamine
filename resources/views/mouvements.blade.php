@@ -64,10 +64,6 @@
         </div>
       </div>
 
-        <div class="align-middle text-center text-sm">
-          <a href="/confirmation"><h6>Valider ce contrat</h6></a>
-        </div>
-
 
       <div class="row">
         <div class="col-12">
@@ -81,6 +77,7 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">accessoire</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">stock restant</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">entrées</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">sorties</th>
                       <th class="text-secondary opacity-7"></th>
@@ -92,11 +89,14 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                       <tr>
                       <td class="align-middle text-center text-sm">
-                          <select name="id_accessoire">
+                          <select name="id_accessoire" id = "accessoire">
                             @foreach($accessoires as $accessoire)
-                              <option value="{{ $accessoire->id_accessoire }}">{{$accessoire->accessoire}}</option>
+                              <option value="{{ $accessoire->id_accessoire }}" id="{{ $accessoire->stock }}">{{$accessoire->accessoire}}</option>
                             @endforeach
                           </select>
+                        </td>
+                        <td>
+                          <p id="stock">{{ $accessoires[0]->stock }}</p>
                         </td>
                         <td>
                         <input type="number" name="entrees" placeholder="entrées" min="0" required />
@@ -104,6 +104,7 @@
                         <td class="align-middle text-center text-sm">
                           <input type="number" name="sorties" placeholder="sorties" min="0" required />
                         </td>
+
                         <td><input type="submit" value="Ajouter" /></td>
                       </tr>
                     </form>
@@ -115,7 +116,42 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="align-middle text-center text-sm">
+                <a href="/confirmation"><br/><h6>Valider ce contrat</h6></a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+
+      </div>
+
+
+
+
+      <script>
+        // Récupérer les éléments du DOM
+        const selectAccessoire = document.getElementById('accessoire');
+        const uniteElement = document.getElementById('unite');
+        const stockElement = document.getElementById('stock');
+
+        // Écouter l'événement de changement du select
+        selectAccessoire.addEventListener('change', function() {
+          // Obtenir la valeur sélectionnée dans le select
+          var selectedOption = selectAccessoire.options[selectAccessoire.selectedIndex];
+            var accessory = selectedOption.id;
+            var stock = selectedOption.namespace;
+          
+          // Mettre à jour la valeur du paragraphe "unite"
+          stockElement.textContent = accessory;
+        });
+      </script>
 
 
 @stop

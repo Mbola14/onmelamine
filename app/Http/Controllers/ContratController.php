@@ -42,7 +42,7 @@ class ContratController extends Controller
 
         $select = DB::select("SELECT * FROM v_mvt WHERE id_contrat = ".$id_contrat);
         $sel = DB::select("SELECT * FROM v_allContrats WHERE id_contrat = ".$id_contrat);
-        $accessoire = DB::select("SELECT * FROM accessoire");
+        $accessoire = DB::select("SELECT * FROM v_stock ORDER BY id_accessoire");
 
         return view('mouvements', [
             'mouvements' => $select,
@@ -73,7 +73,7 @@ class ContratController extends Controller
 
         $select = DB::select("SELECT * FROM v_mvt WHERE id_contrat = ".$id_contrat);
         $sel = DB::select("SELECT * FROM v_allContrats WHERE id_contrat = ".$id_contrat);
-        $accessoire = DB::select("SELECT * FROM accessoire");
+        $accessoire = DB::select("SELECT * FROM v_stock ORDER BY id_accessoire");
 
         return view('mouvements', [
             'mouvements' => $select,

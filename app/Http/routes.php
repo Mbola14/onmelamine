@@ -55,8 +55,16 @@ Route::get('/accessoires', [
     'uses' => 'AccessoiresController@init'
 ])->name('liste_clients');
 
+Route::get('/stock', [
+    'uses' => 'StockController@init'
+])->name('list_stock');
+
 Route::post('/ajoutAccessoire', [
     'uses' => 'AccessoiresController@ajoutAccessoire'
+]);
+
+Route::post('/ajoutstock', [
+    'uses' => 'StockController@ajoutstock'
 ]);
 
 Route::get('/erreur', [
