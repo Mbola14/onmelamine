@@ -31,10 +31,12 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $e
      * @return void
      */
-    public function report(Exception $e)
+
+    public function report(Throwable $e)
     {
         parent::report($e);
     }
+
 
     /**
      * Render an exception into an HTTP response.
